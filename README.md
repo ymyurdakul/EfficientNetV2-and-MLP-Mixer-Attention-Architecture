@@ -121,37 +121,8 @@ python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU')
 
 ---
 
-## 🏗️ Model Overview
 
-### 🔹 EfficientNetV2-S Backbone
 
-* Depth: `[2, 4, 4, 6, 9, 15]`
-* Width: `[24, 48, 64, 128, 160, 256]`
-* SE modules in deeper stages
-* Auto-fused MBConv for early stages
-* Optional pretrained ImageNet weights
-
-### 🔹 Linear-Attention Mixer Head
-
-Transforms spatial feature maps → sequence tokens:
-
-* 1×1 projection
-* Reshape to `[B, N, C]`
-* Apply **token mixing** with Linear Attention
-* Apply **channel mixing** with Linear Attention
-* Add residual connections
-* Fully configurable:
-
-  * `mixer_tokens_mlp_dim` (default **128**) 🎛️
-  * `mixer_channels_mlp_dim` (default **512**) 🎚️
-  * `mixer_blocks` (default **4**) 🔁
-
-### 🔹 Classification Head
-
-* LayerNorm
-* Global Average Pooling
-* Dense classifier
-* Supports multi-class, binary, and multi-label tasks
 
 ---
 
@@ -194,38 +165,6 @@ model.summary()
 
 ---
 
-## 🧪 Training Tips
-
-### 🔥 Recommended settings
-
-* Optimizer: `AdamW` or `RAdam`
-* Learning rate: `1e-4`
-* Weight decay: `1e-5`
-* Mixed precision on GPUs for faster training
-
-### 🎨 Suggested Data Augmentations
-
-* Random rotation
-* Random crop
-* Gaussian noise
-* Intensity shift (medical images benefit)
-
-### 🩺 Medical Imaging Notes
-
-* Normalize intensity range
-* Consider skull stripping for MRI
-* Use stratified splitting
-
----
-
-## 📈 Reproducibility
-
-To ensure stable and repeatable training:
-
-* Fix random seeds
-* Log environment versions
-* Save model checkpoints + training metadata
-* Keep preprocessing consistent
 
 ---
 
